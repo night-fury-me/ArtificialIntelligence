@@ -68,51 +68,51 @@ public:
                 // Check Horizontally
                 int playerIdx = player == 1 ? 0 : 1;
                 for( int i = 0; i < 6; i ++ ) {
-            			for( int j = 0; j < 4; j ++ )  {
-            				if( isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 1 ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 2 ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 3 ) ) {
-            					playerScore++;
-            				}
-            			}
+			for( int j = 0; j < 4; j ++ )  {
+				if( isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 1 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 2 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j + 3 ) ) {
+					playerScore++;
+				}
+			}
                 }
                 //cout << "---->> " << this->playerBoard[ player & 1 ] << endl;
                 //cout << "====>> " << playerScore << endl;
                 // Check Vertically
-            		for( int i = 0; i < 3; i ++ ) {
-            			for( int j = 0; j < 7; j ++ ) {
-            				if( isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j ) ) {
-            					playerScore++;
-            				}
-            			}
+		for( int i = 0; i < 3; i ++ ) {
+			for( int j = 0; j < 7; j ++ ) {
+				if( isOn( this->playerBoard[ playerIdx ], ( i * 7 ) + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j ) ) {
+					playerScore++;
+				}
+			}
                 }
 
                 // Check Diagonally - backs lash
-            		for( int i = 0; i < 3; i ++ ){
-            			for( int j = 0; j < 4; j ++ ) {
-            				if( isOn( this->playerBoard[ playerIdx ], i * 7 + j ) &&
-                          isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j + 1 ) &&
-                          isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j + 2 ) &&
-                          isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j + 3 ) ) {
-					                playerScore++;
-            				}
-            			}
+		for( int i = 0; i < 3; i ++ ){
+			for( int j = 0; j < 4; j ++ ) {
+				if( isOn( this->playerBoard[ playerIdx ], i * 7 + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j + 1 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j + 2 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j + 3 ) ) {
+					playerScore++;
+				}
+			}
                 }
 
                 // Check Diagonally - forward slash
-            		for( int i = 0; i < 3; i ++ ){
-            			for( int j = 0; j < 4; j ++ ) {
-            				if( isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j + 1 ) &&
-                        isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j + 2 ) &&
-                        isOn( this->playerBoard[ playerIdx ], i * 7 + j + 3 ) ) {
-            					playerScore++;
-            				}
-            			}
+		for( int i = 0; i < 3; i ++ ){
+			for( int j = 0; j < 4; j ++ ) {
+				if( isOn( this->playerBoard[ playerIdx ], ( i + 3 ) * 7 + j ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 2 ) * 7 + j + 1 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], ( i + 1 ) * 7 + j + 2 ) &&
+                                    isOn( this->playerBoard[ playerIdx ], i * 7 + j + 3 ) ) {
+					playerScore++;
+				}
+			}
                 }
                 return playerScore;
         }
@@ -209,32 +209,32 @@ public:
         }
 
         bool isValidMove( int column ) {
-        		if ( !( column >= 0 && column < 7 ) ) return false;
-        		else if( isOn( this->wholeBoard, column ) ) {
+		if ( !( column >= 0 && column < 7 ) ) return false;
+		else if( isOn( this->wholeBoard, column ) ) {
                         //cout << "*******************" << endl;
                         //(*this).PrintWholeBoard( );
                         //cout << "*******************" << endl;
                         return false;
 
-            }
-        		else    return true;
+                }
+		else    return true;
         }
 
         bool playPiece( int column ) {
                 if( !isValidMove( column ) ) return false;
-            		else {
-            			for( int i = 5; i >= 0; i -- ) {
-            				if( !isOn( this->wholeBoard, i * 7 + column ) ) {
-                        int player = getCurrentPlayer( ) == 1 ? 0 : 1;
-                        this->wholeBoard = setBit( this->wholeBoard, i * 7 + column );
-                        this->playerBoard[ player ] = setBit( this->playerBoard[ player ], i * 7 + column );
-                        this->placedDisks ++;
-                        return true;
-            				}
-            			}
-                                    //cout << "From here ! " << endl;
-            			return false;
-		           }
+		else {
+			for( int i = 5; i >= 0; i -- ) {
+				if( !isOn( this->wholeBoard, i * 7 + column ) ) {
+                                        int player = getCurrentPlayer( ) == 1 ? 0 : 1;
+                                        this->wholeBoard = setBit( this->wholeBoard, i * 7 + column );
+                                        this->playerBoard[ player ] = setBit( this->playerBoard[ player ], i * 7 + column );
+                                        this->placedDisks ++;
+                                        return true;
+				}
+			}
+                        //cout << "From here ! " << endl;
+			return false;
+		}
         }
 
         void setComputerFirst( bool val ) {
